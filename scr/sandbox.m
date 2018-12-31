@@ -52,3 +52,43 @@ end
 % addpath(genpath(temp));
 % clear temp;
 
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                  MAKES A TABLE FOR LINKS                  %
+%-----------------------------------------------------------%
+% %---------------------------------------------------------------------------%
+% % pupulate the table with rows as Node Standard and columns as csv recordings
+% % first get the values to name the columns and rows
+% tcolsNames = transpose(app.csvData.textdata);
+% %TODO -- stdNodeNames is kinda hardcoded, need a struct to have this names
+% trowsNames = app.nodeStandard.stdNodeNames;
+% 
+% % initialize the table with empty values
+% app.table_nodeAssign.Data = false(size(trowsNames,1), size(tcolsNames,1));
+% 
+% % allow user to modify table
+% app.table_nodeAssign.ColumnEditable = true;
+% 
+% % make table a checkbox one
+% tmpcell = cell(1, size(tcolsNames,1));
+% tmpcell(1:end) = cellstr('logical');
+% app.table_nodeAssign.ColumnFormat = tmpcell;
+% 
+% % include names of columns and rows
+% app.table_nodeAssign.ColumnName = tcolsNames;
+% app.table_nodeAssign.RowName    = trowsNames;
+% 
+% % format width and height to be the min for
+% tcolsize = cell(1, size(tcolsNames,1));
+% tcolsize(1:end) = num2cell(30);
+% app.table_nodeAssign.ColumnWidth = tcolsize;
+% 
+% % display table
+% app.table_nodeAssign.Visible = 'on';
+% 
+% % permit diagonal button to work now
+% app.button_makeDiagonalTrue.Enable = 'on';
+

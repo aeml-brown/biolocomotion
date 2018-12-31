@@ -34,6 +34,7 @@ classdef bioJoint < biolocomotionMainVar
   end
 
   properties
+    % should bejave like node, joint, origin
     name   = "default--changeme";%TODO -- this is looking for a string not a char, ok??
     xylim  = [-pi(), pi()];
     xzlim  = [-pi(), pi()];
