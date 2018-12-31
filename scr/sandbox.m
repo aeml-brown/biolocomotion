@@ -1,4 +1,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                  EVAL TO CREATE JOINTS                    %
+%-----------------------------------------------------------%
+
+b = bioLinkage('tree');
+for(i=1: size(app.conGraph.Nodes.Name,1))
+  b.addJoints(bioJoint(app.conGraph.Nodes.Name{1}));
+end
+
+
+
+
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %         DISPLAY NORMAL ARROW VECTOR IN ANIMATION          %
 %-----------------------------------------------------------%
 

@@ -14,8 +14,8 @@ classdef bioLink < biolocomotionMainVar
   end
 
   properties %TODO -- some of these should not be public
-    name    = "";
-    linkMode = ["symbolic"; "constrained"; "rigid"];%TODO -- is it best to do chars and init array bigger
+    name    = '';
+    linkMode = {'symbolic'; 'constrained'; 'rigid'};%TODO -- is it best to do chars and init array bigger
     mass    = 0;
     massDis = 1; %TODO -- use symbolic toolbox to allow non uniform mass distr
     %syms xt xy xz
@@ -40,7 +40,7 @@ classdef bioLink < biolocomotionMainVar
 %------------------------------------------------------------%
     % joint name should not be an empty string
     function o = set.name(o, tname)
-      if (isstring(tname) & ndims(tname)==2 & size(tname,1)==1 & tname~="")
+      if (ischar(tname) & ndims(tname)==2 & size(tname,1)==1 & ~isempty(tname))
         o.name = tname;
         %TODO -- check that the name is different from the attached joint's name
       else

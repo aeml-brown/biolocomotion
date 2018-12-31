@@ -35,7 +35,7 @@ classdef bioJoint < biolocomotionMainVar
 
   properties
     % should bejave like node, joint, origin
-    name   = "default--changeme";%TODO -- this is looking for a string not a char, ok??
+    name   = 'default--changeme';%TODO -- this is looking for a string not a char, ok??
     xylim  = [-pi(), pi()];
     xzlim  = [-pi(), pi()];
     yzlim  = [-pi(), pi()];
@@ -72,7 +72,7 @@ classdef bioJoint < biolocomotionMainVar
 %------------------------------------------------------------%
     % joint name should not be an empty string
     function o = set.name(o, tname)
-      if (isstring(tname) & ndims(tname)==2 & size(tname,1)==1 & tname~="")
+      if (ischar(tname) & ndims(tname)==2 & size(tname,1)==1 & ~isempty(tname))
         o.name = tname;
       else
         o.lE(o.lTAG, "invalid name"); %TODO -- this should be inside a try and catch
