@@ -9,8 +9,8 @@ classdef bioLink < biolocomotionMainVar
 %                      PROPERTIES                            %
 %------------------------------------------------------------%
 
-  properties(Access=private)
-    lTAG = "BioLink Class: ";
+  properties(Access=private, Constant=true)
+    lTAG = 'BioLink Class:';
   end
 
   properties %TODO -- some of these should not be public
@@ -26,13 +26,11 @@ classdef bioLink < biolocomotionMainVar
 %------------------------------------------------------------%
   methods
     function o = bioLink(tname)%TODO -- tmatrix is ignored if tlinkmode is symbolic.. ok?
-      o.lD(o.lTAG, "init constructor");
+      o.lD(o.lTAG, 'init constructor');
       if(nargin~=1)
-        o.lE(o.lTAG, "name must be provided");
-        error("");
+        o.lE(o.lTAG, 'name must be provided');
       end
       o.name = tname;
-      
     end
 
 %------------------------------------------------------------%
@@ -44,7 +42,7 @@ classdef bioLink < biolocomotionMainVar
         o.name = tname;
         %TODO -- check that the name is different from the attached joint's name
       else
-        o.lE(o.lTAG, "invalid name"); %TODO -- this should be inside a try and catch
+        o.lE(o.lTAG, 'invalid name'); %TODO -- this should be inside a try and catch
       end
     end
 
@@ -54,7 +52,7 @@ classdef bioLink < biolocomotionMainVar
         o.mass = tmass;
       else
         o.mass = 0;
-        o.lE(o.lTAG, "mass not valid, default to value 0");
+        o.lE(o.lTAG, 'mass not valid, default to value 0');
       end
     end
 
@@ -64,7 +62,7 @@ classdef bioLink < biolocomotionMainVar
         o.massDis = tmassDis;
       else
         o.massDis = 0;
-        o.lE(o.lTAG, "mass Distribution not valid, default to value 0");
+        o.lE(o.lTAG, 'mass Distribution not valid, default to value 0');
       end
     end
 

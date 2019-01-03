@@ -29,13 +29,19 @@ classdef bioJoint < biolocomotionMainVar
 %                      PROPERTIES                            %
 %------------------------------------------------------------%
 
-  properties(Access=private)
-    lTAG = "BioJoint Class: ";
+  properties(Access=public, Constant=true)
+    % use this variable to create joints for this class
+    jointTypes = struct('joint','joint','node','node');
+  end
+
+  properties(Access=private, Constant=true)
+    lTAG = 'BioJoint Class:';
   end
 
   properties
     % should bejave like node, joint, origin
     name   = 'default--changeme';%TODO -- this is looking for a string not a char, ok??
+    jtype;
     xylim  = [-pi(), pi()];
     xzlim  = [-pi(), pi()];
     yzlim  = [-pi(), pi()];
@@ -45,24 +51,31 @@ classdef bioJoint < biolocomotionMainVar
 %                      CONSTRUCT                             %
 %------------------------------------------------------------%
   methods
-    function o = bioJoint(tname, txylim, txzlim, tyzlim)
-      o.lD(o.lTAG, "init constructor");
-      if(nargin==0)
-        o.lE(o.lTAG, "at least joint name should be entered"); %TODO -- error handing
+    function o = bioJoint(tname, tjtype, txylim, txzlim, tyzlim)
+      %TODO -- can I use the string pointers to know the user inputs istead? ('type', 'joint')
+      o.lD(o.lTAG, 'init constructor');
+      if(nargin<2)
+        o.lE(o.lTAG, 'at least joint name and type should be entered'); %TODO -- error handing
       end
-      if(nargin>4)
-        o.lE(o.lTAG, "too many arguments"); %TODO -- error handling
-      end
-      if(nargin>=1)
-        o.name  = tname;
+      if(nargin>5)
+        o.lE(o.lTAG, 'too many arguments'); %TODO -- error handling
       end
       if(nargin>=2)
-        o.xylim = txylim;
+        o.name  = tname;
+        %TODO -- this does not look that rubust
+        if(any(strcmp({o.jointTypes.joint o.jointTypes.node},tjtype)))
+          o.jtype = tjtype;
+        else
+          o.lE(o.lTAG, 'type does not match, use public class struct property jointTypes to create joints');
+        end
       end
       if(nargin>=3)
+        o.xylim = txylim;
+      end
+      if(nargin>=4)
         o.xzlim = txzlim;
       end
-      if(nargin==4)
+      if(nargin==5)
         o.yzlim = tyzlim;
       end
     end
@@ -75,7 +88,7 @@ classdef bioJoint < biolocomotionMainVar
       if (ischar(tname) & ndims(tname)==2 & size(tname,1)==1 & ~isempty(tname))
         o.name = tname;
       else
-        o.lE(o.lTAG, "invalid name"); %TODO -- this should be inside a try and catch
+        o.lE(o.lTAG, 'invalid name'); %TODO -- this should be inside a try and catch
       end
     end
 
@@ -83,7 +96,7 @@ classdef bioJoint < biolocomotionMainVar
       if (isnumeric(txylim) & size(txylim)==[1,2] & (txylim(1,1)>=-pi() & txylim(1,1)<=0) & (txylim(1,2)>=0 & txylim(1,2)<=pi())) %TODO -- do I need to include class(xxx)=='double' ??
         o.xylim = txylim;
       else
-        o.lE(o.lTAG, "invalid range in xy plane"); %TODO -- this should be inside a try and catch
+        o.lW(o.lTAG, 'invalid range in xy plane'); %TODO -- this should be inside a try and catch
       end
     end
 
@@ -91,7 +104,7 @@ classdef bioJoint < biolocomotionMainVar
       if (isnumeric(txzlim) & size(txzlim)==[1,2] & (txzlim(1,1)>=-pi() & txzlim(1,1)<=0) & (txzlim(1,2)>=0 & txzlim(1,2)<=pi())) %TODO -- do I need to include class(xxx)=='double' ??
         o.xzlim = txzlim;
       else
-        o.lE(o.lTAG, "invalid range in xz plane"); %TODO -- this should be inside a try and catch
+        o.lW(o.lTAG, 'invalid range in xz plane'); %TODO -- this should be inside a try and catch
       end
     end
 
@@ -99,7 +112,7 @@ classdef bioJoint < biolocomotionMainVar
       if (isnumeric(tyzlim) & size(tyzlim)==[1,2] & (tyzlim(1,1)>=-pi() & tyzlim(1,1)<=0) & (tyzlim(1,2)>=0 & tyzlim(1,2)<=pi())) %TODO -- do I need to include class(xxx)=='double' ??
         o.yzlim = tyzlim;
       else
-        o.lE(o.lTAG, "invalid range in yz plane"); %TODO -- this should be inside a try and catch
+        o.lW(o.lTAG, 'invalid range in yz plane'); %TODO -- this should be inside a try and catch
       end
     end
 
