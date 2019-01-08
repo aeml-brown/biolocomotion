@@ -15,7 +15,7 @@ classdef bioLinkage < biolocomotionMainVar & handle
 
   properties %TODO -- some of these should not be public
     name    = '';
-    joints;
+    joints = struct();
     links;
     adjMatrix;
     graph;
@@ -54,7 +54,7 @@ classdef bioLinkage < biolocomotionMainVar & handle
       if(class(tjoints)~='bioJoint')%TODO -- this trows error when not true because array is not of same size not only because it does not match the arg
         o.lE(o.lTAG, 'this is not a bioJoint class object');
       else
-        o.joints = tjoints;
+        o.joints.(tjoints.name) = tjoints;
       end
     end
 
@@ -88,7 +88,11 @@ classdef bioLinkage < biolocomotionMainVar & handle
         if(class(varargin{i})~='bioJoint')%TODO -- this trows error when not true because array is not of same size not only because it does not match the arg
           o.lE(o.lTAG, 'this is not a bioJoint class object');
         else
-          o.joints = [o.joints; varargin{i}];
+          %TODO -- is this hardcoded?
+         display(varargin); 
+          o.joints.test = varargin{i};
+          %o.joints.(varargin{i}.name) = varargin{i};
+          %o.joints = [o.joints; varargin{i}];
         end
       end
     end
