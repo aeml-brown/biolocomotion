@@ -1,19 +1,10 @@
-function y = sandboxFunc(a)
-  names = {'appName';
-  'appVersion';
-  'appAuthor';
-  'conGraph';
-  'graphPlot';
-  'adjMatrix';
-  'stdName';
-  'image';
-  'body';};
+function sandboxFunc(a)
+  
+display('this');
 
+error('error')
 
-  for i = 1: length(names)
-    y.(names{i}) = a+i;
-
-  end
+display('butnot');
 
 end
 

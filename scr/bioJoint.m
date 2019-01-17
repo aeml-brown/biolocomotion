@@ -38,9 +38,10 @@ classdef bioJoint < biolocomotionMainVar
     lTAG = 'BioJoint Class:';
   end
 
-  properties
+
+  properties (Access=public) %TODO -- some of these should not be public
     % should bejave like node, joint, origin
-    name   = 'default--changeme';%TODO -- this is looking for a string not a char, ok??
+    name   = 'default--changeme';
     jtype;
     xylim  = [-pi(), pi()];
     xzlim  = [-pi(), pi()];
@@ -62,12 +63,7 @@ classdef bioJoint < biolocomotionMainVar
       end
       if(nargin>=2)
         o.name  = tname;
-        %TODO -- this does not look that rubust
-        if(any(strcmp({o.jointTypes.joint o.jointTypes.node},tjtype)))
-          o.jtype = tjtype;
-        else
-          o.lE(o.lTAG, 'type does not match, use public class struct property jointTypes to create joints');
-        end
+        o.jtype = tjtype;
       end
       if(nargin>=3)
         o.xylim = txylim;
@@ -83,14 +79,26 @@ classdef bioJoint < biolocomotionMainVar
 %------------------------------------------------------------%
 %                     CLASS SETS                             %
 %------------------------------------------------------------%
-    % joint name should not be an empty string
+    % joint name should not be an empty string, should be a valid variable
     function o = set.name(o, tname)
-      if (ischar(tname) & ndims(tname)==2 & size(tname,1)==1 & ~isempty(tname))
+      if (isvarname(tname))
         o.name = tname;
       else
         o.lE(o.lTAG, 'invalid name'); %TODO -- this should be inside a try and catch
       end
     end
+%------------------------------------------------------------%
+
+    % joint type should come from the struct name public const var
+    function o = set.jtype(o, tjtype)
+      %TODO -- use fieldnames() here
+      if(any(strcmp({o.jointTypes.joint o.jointTypes.node},tjtype)))
+        o.jtype = tjtype;
+      else
+        o.lE(o.lTAG, 'type does not match, use public class struct property jointTypes to create joints');
+      end
+    end
+%------------------------------------------------------------%
 
     function o = set.xylim(o, txylim)
       if (isnumeric(txylim) & size(txylim)==[1,2] & (txylim(1,1)>=-pi() & txylim(1,1)<=0) & (txylim(1,2)>=0 & txylim(1,2)<=pi())) %TODO -- do I need to include class(xxx)=='double' ??
@@ -99,6 +107,7 @@ classdef bioJoint < biolocomotionMainVar
         o.lW(o.lTAG, 'invalid range in xy plane'); %TODO -- this should be inside a try and catch
       end
     end
+%------------------------------------------------------------%
 
     function o = set.xzlim(o, txzlim)
       if (isnumeric(txzlim) & size(txzlim)==[1,2] & (txzlim(1,1)>=-pi() & txzlim(1,1)<=0) & (txzlim(1,2)>=0 & txzlim(1,2)<=pi())) %TODO -- do I need to include class(xxx)=='double' ??
@@ -107,6 +116,7 @@ classdef bioJoint < biolocomotionMainVar
         o.lW(o.lTAG, 'invalid range in xz plane'); %TODO -- this should be inside a try and catch
       end
     end
+%------------------------------------------------------------%
 
     function o = set.yzlim(o, tyzlim)
       if (isnumeric(tyzlim) & size(tyzlim)==[1,2] & (tyzlim(1,1)>=-pi() & tyzlim(1,1)<=0) & (tyzlim(1,2)>=0 & tyzlim(1,2)<=pi())) %TODO -- do I need to include class(xxx)=='double' ??
@@ -115,8 +125,7 @@ classdef bioJoint < biolocomotionMainVar
         o.lW(o.lTAG, 'invalid range in yz plane'); %TODO -- this should be inside a try and catch
       end
     end
+%------------------------------------------------------------%
 
   end %methods
-
-
 end %classdef

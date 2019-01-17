@@ -14,9 +14,9 @@ classdef bioLinkage < biolocomotionMainVar & handle
   end
 
   properties %TODO -- some of these should not be public
-    name    = '';
+    name   = '';
     joints = struct();
-    links;
+    links  = struct();
     adjMatrix;
     graph;
     standard;
@@ -34,7 +34,6 @@ classdef bioLinkage < biolocomotionMainVar & handle
         o.name = tname;
         o.joints = torigin;
       end
-
     end
 
 %------------------------------------------------------------%
@@ -42,29 +41,35 @@ classdef bioLinkage < biolocomotionMainVar & handle
 %------------------------------------------------------------%
     % joint name should not be an empty string
     function o = set.name(o, tname)
-      if (ischar(tname) & ndims(tname)==2 & size(tname,1)==1 & ~isempty(tname))
+      if (isvarname(tname))
         o.name = tname;
         %TODO -- check that the name is different from the attached joint's name
       else
         o.lE(o.lTAG, 'invalid name'); %TODO -- this should be inside a try and catch
       end
     end
+%------------------------------------------------------------%
 
     function o = set.joints(o, tjoints)
-      if(class(tjoints)~='bioJoint')%TODO -- this trows error when not true because array is not of same size not only because it does not match the arg
+      %TODO -- should the class biojoint have object class name as a variable? this is hardcoded
+      if(~strcmp(class(tjoints), 'bioJoint'))
         o.lE(o.lTAG, 'this is not a bioJoint class object');
       else
+        % add new joint, name the struct field in joints to be the same as the bioJoint declared name
         o.joints.(tjoints.name) = tjoints;
       end
     end
+%------------------------------------------------------------%
 
     function o = set.links(o, tlinks)
-      if(class(tlinks)~='bioLink')%TODO -- this trows error when not true because array is not of same size not only because it does not match the arg
+      if(~strcmp(class(tlinks), 'bioLink'))
         o.lE(o.lTAG, 'this is not a bioLink class object');
       else
-        o.links = tlinks;
+        % add new link, name the struct field in links to be the same as the bioLink declared name
+        o.links.(tlinks.name) = tlinks;
       end
     end
+%------------------------------------------------------------%
 
     function o = set.adjMatrix(o, tadjMatrix)
       %TODO -- i am not error cheking here for now. if using gui, this should be good
@@ -85,29 +90,27 @@ classdef bioLinkage < biolocomotionMainVar & handle
 
     function addJoints(o, varargin)
       for i = 1:nargin-1
-        if(class(varargin{i})~='bioJoint')%TODO -- this trows error when not true because array is not of same size not only because it does not match the arg
+        if(~strcmp(class(varargin{i}), 'bioJoint'))%TODO -- i am error checking this twice, here and in set
           o.lE(o.lTAG, 'this is not a bioJoint class object');
         else
-          %TODO -- is this hardcoded?
-         display(varargin); 
-          o.joints.test = varargin{i};
-          %o.joints.(varargin{i}.name) = varargin{i};
-          %o.joints = [o.joints; varargin{i}];
+          % joints already declared as struct, set class handles name of new element in struct
+          o.joints = varargin{i};
         end
       end
     end
-
+%------------------------------------------------------------%
 
     function addLinks(o, varargin)
       for i = 1:nargin-1
-        if(class(varargin{i})~='bioLink')%TODO -- this trows error when not true because array is not of same size not only because it does not match the arg
+        if(~strcmp(class(varargin{i}), 'bioLink'))
           o.lE(o.lTAG, 'this is not a bioLink class object');
         else
-          o.links = [o.links; varargin{i}];
+          % add new joint, name the struct field in joints to be the same as the bioJoint declared name
+          o.links = varargin{i};
         end
       end
     end
-
+%------------------------------------------------------------%
 
   end %methods
 end %bioLinkClass
