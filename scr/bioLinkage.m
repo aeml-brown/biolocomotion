@@ -11,9 +11,12 @@ classdef bioLinkage < biolocomotionMainVar & handle
 
   properties(Access=private, Constant=true)
     lTAG = 'BioLinkage Class:';
+    jointSavePrefix = 'joint_';
+    linkSavePrefix = 'link_';
   end
 
-  properties %TODO -- some of these should not be public
+
+  properties(Access=public, Constant=false)
     name   = '';
     joints = struct();
     links  = struct();
@@ -26,19 +29,22 @@ classdef bioLinkage < biolocomotionMainVar & handle
 %                      CONSTRUCT                             %
 %------------------------------------------------------------%
   methods
-    function o = bioLinkage(tname, torigin)
+
+    function o = bioLinkage(tname)
       o.lD(o.lTAG, 'init constructor');
-      if(nargin~=2)
-        o.lE(o.lTAG, 'name and origin joint need to be initialized');
+      if(nargin~=1)
+        o.lE(o.lTAG, 'name for joint needs to be initialized');
       else
         o.name = tname;
-        o.joints = torigin;
       end
     end
 
+  end%methods public constructor
 %------------------------------------------------------------%
 %                     CLASS SETS                             %
 %------------------------------------------------------------%
+  methods
+
     % joint name should not be an empty string
     function o = set.name(o, tname)
       if (isvarname(tname))
@@ -84,9 +90,12 @@ classdef bioLinkage < biolocomotionMainVar & handle
       o.standard = tstandard;
     end
 
+  end%methods public sets
+
 %------------------------------------------------------------%
 %                    CLASS FUNCTIONS                         %
 %------------------------------------------------------------%
+  methods(Access=public)
 
     function addJoints(o, varargin)
       for i = 1:nargin-1
@@ -110,7 +119,68 @@ classdef bioLinkage < biolocomotionMainVar & handle
         end
       end
     end
+
+  end%methods public funcions
+
+%------------------------------------------------------------%
+%                    SAVE CLASS OBJECT                       %
+%------------------------------------------------------------%
+  methods(Access=public)
+
+    function s = saveobj(o)
+      % save the class object in a 1D struture
+      % use prefix to store class structures like joits and links
+      s.name      = o.name;
+      s.adjMatrix = o.adjMatrix;
+      s.graph     = o.graph;
+      s.standard  = o.standard;
+
+      % decompose class joint structure one level with prefix
+      tjointnames = fieldnames(o.joints);
+      for i = 1:length(tjointnames)
+        s.(['joint_' tjointnames{i}]) = o.joints.(tjointnames{i});
+      end
+
+      % decompose class liink structure one level with prefix
+      tlinknames = fieldnames(o.links);
+      for i = 1:length(tlinknames)
+        s.(['link_' tlinknames{i}]) = o.links.(tlinknames{i});
+      end
+    end
+
+  end%methods publc save
 %------------------------------------------------------------%
 
-  end %methods
+  methods (Static)
+
+    function o = loadobj(s)
+      % create a temporary object of this class
+      tobj = bioLinkage(s.name);
+
+      % assign the properties of saved structure
+      tobj.adjMatrix = s.adjMatrix;
+      tobj.graph     = s.graph;
+      tobj.standard  = s.standard;
+
+      % take all the names in structure that have prefixes
+      % then create a nested structure
+      tnames  = fieldnames(s);
+
+      tjoints = tnames(contains(tnames, tobj.jointSavePrefix));
+      for i = 1:length(tjoints)
+          tobj.addJoints(s.(tjoints{i}));
+      end
+
+      tlinks = tnames(contains(tnames, tobj.linkSavePrefix));
+      for i = 1:length(tlinks)
+          tobj.addLinks(s.(tlinks{i}));
+      end
+
+      % assign the created structure to the output of this load func
+      o = tobj;
+    end
+
+  end%methods Static load
+%------------------------------------------------------------%
+
 end %bioLinkClass

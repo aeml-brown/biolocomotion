@@ -1,0 +1,47 @@
+You Just have to do this once:
+
+1. Save attached file here. The folder app data is hidden, you can type
+it into the nav bar directly (%HOMEPATH% = C:\Users\yourUserName\)
+%HOMEPATH%\AppData\Roaming\Microsoft\AddIns
+
+2. Load the macro to excel
+- Open Excel
+	>tab "file"
+	>options
+	>add-ins
+	>"Manage Excel Add-ins" Go
+	>check "Renameworkbookpages"
+	>ok
+
+3. Trust the macro I created
+- Open Excel
+	>tab "file"
+	>options
+	>trust center
+	>trust center settings
+	>macro settings
+	>select "disable all macros with notification
+	>check "Trust access to the VBA project object model"
+	>ok
+	>ok
+
+4. Add it to a quick access button
+	>tab "Data"
+	>right click an empty space
+	>cuztomize the ribbon
+	>select "data" from drop down
+	>new group
+	>right click
+	>rename
+	>"bioLoc export"
+	>choose icon
+	>ok
+	>select it
+	>from the left side commands dropdown choose macros
+	>select macros: "getPageNames" and "renamePagesTo"
+	>Add both
+	>from right side menu, select macros just added
+	>right click rename, add icon if you want to
+	>ok
+
+5. Close excel and its ready to use, it will be in tab "Data"

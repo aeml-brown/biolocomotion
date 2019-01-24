@@ -2,7 +2,7 @@ classdef biolocomotionMainVar < handle
 
   properties (Access=protected, Constant=true)
     appName  = 'biolocomotion';
-    logDebug = true;
+    logDebug = false;
     logFile  = false;
     %TODO -- create error message with a struct
   end

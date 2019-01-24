@@ -188,9 +188,9 @@ classdef cameraObj < biolocomotionMainVar & handle
       % otherwise, just copy the values that are new
       else
         % get the field names that will be copied and the ones that are repeated
-        tinfields = fieldnames(tmetadata);
-        tcurfields = fieldnames(o.metadata);
-        taddfields = tinfields(~contains(tinfields, tcurfields));
+        tinfields    = fieldnames(tmetadata);
+        tcurfields   = fieldnames(o.metadata);
+        taddfields   = tinfields(~contains(tinfields, tcurfields));
         tnoaddfields = tinfields(contains(tinfields, tcurfields));
 
         %copy the unique values
