@@ -2,8 +2,8 @@
 clear all
 close all
 clc
-load('C:\Users\alberto-bortoni\Desktop\sandbox\fistStudy\motionCsvToNodeStdMapApp.mat')
-load('C:\Users\alberto-bortoni\Desktop\sandbox\fistStudy\bat22pts_old.mat')
+load('C:\Users\alberto-bortoni\Desktop\sandbox\carollia\trial\car_bl_t21_5p3ms_L\motionCsvToNodeStdMapApp.mat')
+load('C:\Users\alberto-bortoni\Desktop\sandbox\carollia\share\bat_7pts_L.mat')
 
 %% start stuff
 data =motionCsvToNodeStdMap.motionData;
