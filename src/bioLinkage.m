@@ -99,7 +99,7 @@ classdef bioLinkage < biolocomotionMainVar & handle
 
     function addJoints(o, varargin)
       for i = 1:nargin-1
-        if(~strcmp(class(varargin{i}), 'bioJoint'))%TODO -- i am error checking this twice, here and in set
+        if(~isa(varargin{i}, 'bioJoint'))%TODO -- i am error checking this twice, here and in set
           o.lE(o.lTAG, 'this is not a bioJoint class object');
         else
           % joints already declared as struct, set class handles name of new element in struct
@@ -111,7 +111,7 @@ classdef bioLinkage < biolocomotionMainVar & handle
 
     function addLinks(o, varargin)
       for i = 1:nargin-1
-        if(~strcmp(class(varargin{i}), 'bioLink'))
+        if(~isa(varargin{i}, 'bioLink'))
           o.lE(o.lTAG, 'this is not a bioLink class object');
         else
           % add new joint, name the struct field in joints to be the same as the bioJoint declared name

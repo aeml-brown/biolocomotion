@@ -19,7 +19,7 @@ function arrayOut = convertLenghtUnits(tinarray, tfrom, tto)
   if(exist('biolocomotionMainVar', 'class')==8)
     fER = @(err) biolocomotionMainVar.lEE(lTAG, err);
   else
-    fER = @(err) error([lTAG, err]);
+    fER = @(err) error([lTAG, ' ', err]);
   end
   
   %------------ Preallocated Fun Variables ------------%
@@ -38,11 +38,13 @@ function arrayOut = convertLenghtUnits(tinarray, tfrom, tto)
   end
   
   %-------------- Verify Function Input ---------------%
-  if(~strcmpi(tfrom,tacceptableInputs) & ~strcmpi(tto,tacceptableInputs))
+  if(~exist('tfrom', 'var') || ~exist('tto', 'var'))
+    fER(['Conversion units for FROM and TO fields must be included: ' strjoin(tacceptableInputs, ', ')]);
+  elseif(~strcmpi(tfrom,tacceptableInputs) & ~strcmpi(tto,tacceptableInputs))
     fER(['Input must be valid: ' strjoin(tacceptableInputs, ', ')]);
   elseif(isempty(tinarray))
     fER('Input array cannot be empty');
-  elseif(isnumeric(tinarray))
+  elseif(~isnumeric(tinarray))
     fER('Input array must be numeric');
   end
   

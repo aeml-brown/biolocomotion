@@ -15,7 +15,7 @@ function list = displayDirRecursively(tdirectory)
   if(exist('biolocomotionMainVar', 'class')==8)
     fER = @(err) biolocomotionMainVar.lEE(lTAG, err);
   else
-    fER = @(err) error([lTAG, err]);
+    fER = @(err) error([lTAG, ' ', err]);
   end
   
   %-------------- Verify Function Input ---------------%
