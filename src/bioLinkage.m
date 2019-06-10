@@ -22,7 +22,7 @@ classdef bioLinkage < biolocomotionMainVar & handle
     links  = struct();
     adjMatrix;
     graph;
-    standard;
+    standard = '';
   end
 
 %------------------------------------------------------------%

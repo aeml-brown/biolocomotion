@@ -11,9 +11,10 @@ function tableOut = simpleComputeVectorMagnitude(tableIn, nodeStd)
   % OUTPUT:
   %   - tableOut: table with same col names and lenghts of links
   % FUTURE WORK:
-  %   - accept some form of error margin or correction for the origin tracking
-  %     so that it does not get propagated. At least give some confidence interval
-  %   - check that the data in table is numeric
+  %TODO -- accept some form of error margin or correction for the origin tracking
+  %TODO -- so that it does not get propagated. At least give some confidence interval
+  %TODO -- check that the data in table is numeric
+  %TODO -- accept entry on relative to origin?
 
   %---------------- Function Handling -----------------%
   lTAG = 'simpleComputeVectorMagnitude Function:';
@@ -31,7 +32,7 @@ function tableOut = simpleComputeVectorMagnitude(tableIn, nodeStd)
   elseif(isempty(tableIn))
     fER('Input table can not be empty');
   elseif(~isa(nodeStd, 'bioLinkage'))
-    fER('Input table can not be empty');
+    fER('Input node standard should be of a bioLinkage type');
   end
 
   %---------------- Function Variables ----------------%
@@ -52,17 +53,16 @@ function tableOut = simpleComputeVectorMagnitude(tableIn, nodeStd)
   %------------- Function Implementation ---------------%
   % remove magnitude of body coordinate frame
   % ignore first column as it is the independent var
-  for i = 2 : length(tnames)
-    tableIn.(tnames{i}) = tableIn.(tnames{i}) - torigin;
-  end
+  %for i = 2 : length(tnames)
+  %  tableIn.(tnames{i}) = tableIn.(tnames{i}) - torigin;
+  %end
 
   % create dimension of table with independent variable
   tableOut.(tnames{1}) = tableIn.(tnames{1});
 
   % for every link in node standard compute lenghts
   for i = 1: size(tedges,1)
-    tdist = tableIn.(tedges{i,1}) - tableIn.(tedges{i,2});
+    tdist = tableIn.(tedges{i,2}) - tableIn.(tedges{i,1});
     tableOut.(tlinknames{i})  = sqrt(tdist(:,1).^2 + tdist(:,2).^2 + tdist(:,3).^2);
   end
-
 end

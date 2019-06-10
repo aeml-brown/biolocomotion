@@ -14,6 +14,16 @@ GENERAL
   - Still not sure if clases should be handle, they will pass to other
     classes and functions and create many copyes of that object?
     if a copy of the object gets saved are they still linked?
+  - add JSON files to add help commands on functions
+  - make sure i can save an app version in the workign dir, amke a doc dir
+    or something so that user knows which app version to use.
+  - saved objects need to ocntain app version used to compute them in
+    vars to save
+  - how can i manage autocomplete of objects that save, CTAGS?
+    i need to make sure they are accesible on . command otherwise it feels
+    that they are hardcoded
+  - right now i have no way to really deal with diff version numbers
+    nor am I checking them as i load objects with app names etc
 
 ------------------------------------------------------------------
 polynomial fit
@@ -22,12 +32,9 @@ polynomial fit
   - ther should be a button in ui that calls the help of that func
   - data conversion values are hardcoded m cm, etc
 
-
 ------------------------------------------------------------------
 CAMERA OBJECT
   - should save also app vars because user need to retrieve version number
-
-
 
 ------------------------------------------------------------------
 MAIN VARS
@@ -35,8 +42,10 @@ MAIN VARS
   of main vars will be ever created
   - make error function display a little more pretty
 
-
-
 ------------------------------------------------------------------
 MOTION MAP STANDARD
   - can add a table custom varaible that identifies the unit of measurment of each table
+
+------------------------------------------------------------------
+CREATE NODE STANDARD
+  - plot graph obejects hould be on utils not really in the app.
