@@ -1,4 +1,4 @@
-function userDir = getUserDir
+function userDir = getuserdir
 %GETUSERDIR   return the user home directory.
 %   USERDIR = GETUSERDIR returns the user home directory using the registry
 %   on windows systems and using Java on non windows systems as a string
@@ -6,8 +6,6 @@ function userDir = getUserDir
 %   Example:
 %      getuserdir() returns on windows
 %           C:\Documents and Settings\MyName\Eigene Dateien
-%   created by: Sven Probst
-%   retrieved from: Mathworks file exchange on 2019-08-02
 
 if ispc
     userDir = winqueryreg('HKEY_CURRENT_USER',...
