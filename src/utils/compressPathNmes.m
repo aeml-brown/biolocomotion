@@ -33,6 +33,8 @@ function listComp = compressPathNmes(listExt)
     fER('Input must be valid cell array of characters');
   elseif(size(listExt,2)~=1)
     fER('Input array must be a 1 column cell array');
+  elseif(size(listExt,1)==0)
+    fER('Input array must not be empty');
   end
   
   %---------------- Function Variables ----------------%

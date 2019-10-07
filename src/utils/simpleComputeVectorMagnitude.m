@@ -15,6 +15,7 @@ function tableOut = simpleComputeVectorMagnitude(tableIn, nodeStd)
   %TODO -- so that it does not get propagated. At least give some confidence interval
   %TODO -- check that the data in table is numeric
   %TODO -- accept entry on relative to origin?
+  %TODO -- how is sample number removed? look at modifycoordinategui
 
   %---------------- Function Handling -----------------%
   lTAG = 'simpleComputeVectorMagnitude Function:';

@@ -7,7 +7,7 @@ image(vidFrame, 'Parent', currAxes);
 axis equal;
 r1 = drawrectangle('Parent', currAxes, 'Rotatable', false, 'Color',[1 0 0]);
 
-roi = r1.Position
+roi = r1.Position;
 k=imcrop(vidFrame,roi);
 imshow(k)
 
@@ -28,7 +28,7 @@ while hasFrame(videoRaw)
 end
 
 
-tmp=find(sync.light>((range(sync.light)/2)+min(sync.light));
+tmp=find(sync.light>((range(sync.light)/2)+min(sync.light)));
 sync.signal = zeros(length(sync.light),1);
 sync.signal(tmp) = 1;
 

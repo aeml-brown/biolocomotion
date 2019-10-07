@@ -1,0 +1,86 @@
+<deployment-project plugin="plugin.apptool" plugin-version="1.0">
+  <configuration file="C:\Users\alberto-bortoni\OneDrive\research\biolocomotion\src\gui\Biolocomotion Toolbox.prj" location="C:\Users\alberto-bortoni\OneDrive\research\biolocomotion\src\gui" name="Biolocomotion Toolbox" target="target.mlapps" target-name="Package App">
+    <param.appname>Biolocomotion Toolbox</param.appname>
+    <param.authnamewatermark />
+    <param.email />
+    <param.company />
+    <param.icon />
+    <param.icons />
+    <param.summary />
+    <param.description />
+    <param.screenshot>C:\Users\alberto-bortoni\AppData\Local\Temp\tp677d917a_7ab5_4483_b385_94c156e2e13b.png</param.screenshot>
+    <param.version>1.0</param.version>
+    <param.products.name />
+    <param.products.id />
+    <param.products.version />
+    <param.platforms />
+    <param.output>${PROJECT_ROOT}</param.output>
+    <param.guid>9722c9c2-832f-4347-811d-ff9678965915</param.guid>
+    <unset>
+      <param.authnamewatermark />
+      <param.email />
+      <param.company />
+      <param.icon />
+      <param.icons />
+      <param.summary />
+      <param.description />
+      <param.version />
+      <param.products.name />
+      <param.products.id />
+      <param.products.version />
+      <param.platforms />
+      <param.output />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}\biolocomotionGui.mlapp</file>
+    </fileset.main>
+    <fileset.depfun>
+      <file>C:\Users\alberto-bortoni\Documents\MATLAB\Add-Ons\Functions\arrow\arrow.m</file>
+      <file>C:\Users\alberto-bortoni\OneDrive\research\biolocomotion\src\bioJoint.m</file>
+      <file>C:\Users\alberto-bortoni\OneDrive\research\biolocomotion\src\bioLink.m</file>
+      <file>C:\Users\alberto-bortoni\OneDrive\research\biolocomotion\src\bioLinkage.m</file>
+      <file>C:\Users\alberto-bortoni\OneDrive\research\biolocomotion\src\biolocomotionMainVar.m</file>
+      <file>C:\Users\alberto-bortoni\OneDrive\research\biolocomotion\src\cameraObj.m</file>
+      <file>${PROJECT_ROOT}\createBlankStudyArchitectureGui.mlapp</file>
+      <file>${PROJECT_ROOT}\createCameraObjGui.mlapp</file>
+      <file>${PROJECT_ROOT}\createNodeStandardGui.mlapp</file>
+      <file>${PROJECT_ROOT}\motionAnimationViewerGui.mlapp</file>
+      <file>${PROJECT_ROOT}\motionCsvToNodeStdMapGui.mlapp</file>
+      <file>C:\Users\alberto-bortoni\OneDrive\research\biolocomotion\src\utils\compressPathNmes.m</file>
+      <file>C:\Users\alberto-bortoni\OneDrive\research\biolocomotion\src\utils\convertLenghtUnits.m</file>
+      <file>C:\Users\alberto-bortoni\OneDrive\research\biolocomotion\src\utils\displayDirRecursively.m</file>
+    </fileset.depfun>
+    <fileset.resources />
+    <fileset.package />
+    <build-deliverables>
+      <file location="C:\Users\alberto-bortoni\OneDrive\research\biolocomotion\src" name="gui" optional="false">C:\Users\alberto-bortoni\OneDrive\research\biolocomotion\src\gui</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>C:\Program Files\MATLAB\R2019a</root>
+      <toolboxes>
+        <toolbox name="matlabcoder" />
+      </toolboxes>
+      <toolbox>
+        <matlabcoder>
+          <enabled>true</enabled>
+        </matlabcoder>
+      </toolbox>
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>10.0</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>

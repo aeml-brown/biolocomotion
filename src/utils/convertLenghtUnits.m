@@ -13,6 +13,7 @@ function arrayOut = convertLenghtUnits(tinarray, tfrom, tto)
   % FUTURE WORK:
   %TODO -- accept input arg 'custom' and make third input a gain
   %TODO -- accept input argument to force reload of persistent vars
+  %TODO -- the root path to the conversion table is hardcoded!
 
   %---------------- Function Handling -----------------%
   lTAG = 'convertLenghtUnits Function:';

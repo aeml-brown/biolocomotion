@@ -15,11 +15,11 @@ classdef bioLinkage < biolocomotionMainVar & handle
     linkSavePrefix = 'link_';
   end
 
-
   properties(Access=public, Constant=false)
     name   = '';
     joints = struct();
     links  = struct();
+    originName = '';
     adjMatrix;
     graph;
     standard = '';
@@ -77,6 +77,17 @@ classdef bioLinkage < biolocomotionMainVar & handle
     end
 %------------------------------------------------------------%
 
+    % joint name should not be an empty string
+    function o = set.originName(o, tname)
+      if (isvarname(tname))
+        o.originName = tname;
+        %TODO -- check that the name is different from the attached joint's name
+      else
+        o.lE(o.lTAG, 'invalid name'); %TODO -- this should be inside a try and catch
+      end
+    end
+%------------------------------------------------------------%
+
     function o = set.adjMatrix(o, tadjMatrix)
       %TODO -- i am not error cheking here for now. if using gui, this should be good
       o.adjMatrix = tadjMatrix;
@@ -130,10 +141,11 @@ classdef bioLinkage < biolocomotionMainVar & handle
     function s = saveobj(o)
       % save the class object in a 1D struture
       % use prefix to store class structures like joits and links
-      s.name      = o.name;
-      s.adjMatrix = o.adjMatrix;
-      s.graph     = o.graph;
-      s.standard  = o.standard;
+      s.name       = o.name;
+      s.originName = o.originName;
+      s.adjMatrix  = o.adjMatrix;
+      s.graph      = o.graph;
+      s.standard   = o.standard;
 
       % decompose class joint structure one level with prefix
       tjointnames = fieldnames(o.joints);
@@ -158,9 +170,10 @@ classdef bioLinkage < biolocomotionMainVar & handle
       tobj = bioLinkage(s.name);
 
       % assign the properties of saved structure
-      tobj.adjMatrix = s.adjMatrix;
-      tobj.graph     = s.graph;
-      tobj.standard  = s.standard;
+      tobj.originName = s.originName;
+      tobj.adjMatrix  = s.adjMatrix;
+      tobj.graph      = s.graph;
+      tobj.standard   = s.standard;
 
       % take all the names in structure that have prefixes
       % then create a nested structure

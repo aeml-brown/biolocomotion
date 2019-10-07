@@ -7,6 +7,7 @@ function [listFiles, listDirs] = displayDirRecursively(tdirectory, tlayers)
   % OUTPUT:
   %   - list: a cell array of characters of system paths
   % FUTURE WORK:
+  %   - add ignore string {a,b,c} and use setdiff();
   %
 
   %---------------- Function Handling -----------------%
