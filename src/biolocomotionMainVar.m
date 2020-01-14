@@ -18,6 +18,13 @@ classdef biolocomotionMainVar < handle
 
   properties (Access=public, Constant=true, Hidden=true)
     savedMotionVar = 'motion';
+    ignoreFiles    = {'.Thumbs.db';
+                      'Thumbs.db';
+                      '.DS_Store';
+                      '.gitignore';}
+    ignoreDirs     = {'.';
+                      '..';
+                      '.git'}
   end
 
 %------------------------------------------------------------%
